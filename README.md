@@ -41,3 +41,72 @@ df = pd.DataFrame(np.random.randint(0, 100, size=(10000000, 50)))
 df = df.rename(columns={i:f"x_{i}" for i in range(50)})
 df["category"] = ["A", "B", "C", "D"] * 2500000
 ```
+
+### How much memory does the code use 
+
+```
+np.round(df.memory_usage().sum() / 10**9, 2)
+
+# output
+4.08
+```
+
+### Time taken to filter  
+
+```
+%time df[df["category"]=="A"]
+
+# output
+CPU times: user 519 ms, sys: 911 ms, total: 1.43 s
+Wall time: 2.43 s
+```
+
+### Time taken to sort 
+
+```
+%time df.sort_values(by=["x_0", "x_1"])
+
+# output
+CPU times: user 2.84 s, sys: 1.19 s, total: 4.03 s
+Wall time: 4.52 s
+```
+
+### categorical data
+
+- categorical feature with low-cardinality, using the category data type
+- Low-cardinality means having very few distinct values compared to the total number of values. 
+- The category column in our DataFrame has only 4 distinct values compared to a total of 10 million.
+
+### Downcast numeric columns
+
+- the default integer data type in Pandas is “int64”, 
+- which can store numbers between -9,223,372,036,854,775,808 and 9,223,372,036,854,775,807
+- We can downcast integer columns to int16 or int8 to reduce memory usage
+- use the to_numeric function, which can do the proper downcast for us
+- Check memory usage of a integer columns
+
+```
+df["x_0"].dtypes
+# output
+dtype('int64')
+
+np.round(df["x_0"].memory_usage() / 10**6, 2)
+# output
+80.0
+```
+
+- Now downcast it. 
+
+```
+df["x_0"] = pd.to_numeric(df["x_0"], downcast="unsigned")
+
+df["x_0"].dtypes
+# output
+dtype('uint8')
+
+np.round(df["x_0"].memory_usage() / 10**6, 2)
+# output
+10.0
+```
+
+### Use special data structures for sparse data
