@@ -4,6 +4,77 @@ Hello 2023. Starting a new notepad in the new year.
 
 ## Folder structure 
 
+- https://docs.python-guide.org/writing/structure/
+
+### Modules
+
+- As soon as you use import statements, you use modules. 
+- These can be either built-in modules such as os and sys, 
+- third-party modules you have installed in your environment, 
+- or your project’s internal modules.
+- 
+- Keep module names short, lowercase, 
+- and be sure to avoid using special symbols like the dot (.) or question mark (?). 
+- 
+- You could name your module my_spam.py, 
+- but even our trusty friend the underscore, should not be seen that often in module names. 
+- However, using other characters (spaces or hyphens) in module names will prevent importing (- is the subtract operator). 
+- Try to keep module names short so there is no need to separate words. 
+- And, most of all, don’t namespace with underscores; use submodules instead.
+
+```
+# OK
+import library.plugin.foo
+# not OK
+import library.foo_plugin
+```
+
+### What happens when a module is *Not* found 
+
+- the import modu statement will look for the proper file, 
+- which is modu.py in the same directory as the caller
+- If it is not found, the Python interpreter will search for modu.py in the “path” recursively 
+- and raise an ImportError exception when it is not found.
+
+### What happens when a module is found 
+- When modu.py is found, the Python interpreter will execute the module in an isolated scope. 
+- Any top-level statement in modu.py will be executed, including other imports if any. 
+- Function and class definitions are stored in the module’s dictionary.
+
+### How are import statement of Python different from include of C 
+
+- An include file directive is used by the preprocessor to take all code found in the file and ‘copy’ it into the caller’s code. 
+- It is different in Python: the included code is isolated in a module namespace, 
+- which means that you generally don’t have to worry that the included code could have unwanted effects, e.g. override an existing function with the same name.
+
+
+
+### Bad way of using import, # 1 
+
+```
+[...]
+from modu import *
+[...]
+x = sqrt(4)  # Is sqrt part of modu? A builtin? Defined above?
+```
+
+### Bad way of using import, # 2
+
+```
+from modu import sqrt
+[...]
+x = sqrt(4)  # sqrt may be part of modu, if not redefined in between
+```
+
+### Correct way of using import 
+
+```
+import modu
+[...]
+x = modu.sqrt(4)  # sqrt is visibly part of modu's namespace
+```
+
+
 ## Dependency managment
 
 ## Testing and reporting 
