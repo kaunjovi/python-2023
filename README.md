@@ -10,6 +10,17 @@ Hello 2023. Starting a new notepad in the new year.
 
 ## Deploying (on AWS?)
 
+- https://docs.aws.amazon.com/lambda/latest/dg/lambda-python.html
+- You can run Python code in AWS Lambda. 
+- Lambda provides runtimes for Python that run your code to process events. 
+- Your code runs in an environment that includes the SDK for Python (Boto3),
+    - What about the dependencies ?  
+- with credentials from an AWS Identity and Access Management (IAM) role that you manage.
+- create an execution role
+- create a Python function
+- Sample Lambda applications in Python
+    - https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-python
+
 ## ChatGPT
 
 https://markwschaefer.medium.com/20-entertaining-uses-of-chatgpt-you-never-knew-were-possible-3bc2644d4507
@@ -110,3 +121,13 @@ np.round(df["x_0"].memory_usage() / 10**6, 2)
 ```
 
 ### Use special data structures for sparse data
+
+## Creating a Plotly Graph with 95% CI in Python
+
+- https://python.plainenglish.io/a-step-by-step-guide-to-creating-a-plotly-graph-with-95-ci-in-python-3b7d06ee3f6b
+- install pandas and plotly
+
+```
+import pandas as pd
+import plotly.graph_objects as go
+```
