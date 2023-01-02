@@ -48,7 +48,6 @@ import library.foo_plugin
 - which means that you generally don’t have to worry that the included code could have unwanted effects, e.g. override an existing function with the same name.
 
 
-
 ### Bad way of using import, # 1 
 
 ```
@@ -72,6 +71,44 @@ x = sqrt(4)  # sqrt may be part of modu, if not redefined in between
 import modu
 [...]
 x = modu.sqrt(4)  # sqrt is visibly part of modu's namespace
+```
+
+### Packages
+
+- https://docs.python-guide.org/writing/structure/
+- Any directory with an __init__.py file is considered a Python package. 
+- The different modules in the package are imported in a similar manner as plain modules, 
+- but with a special behavior for the __init__.py file, which is used to gather all package-wide definitions.
+- A file modu.py in the directory pack/ is imported with the statement import pack.modu. 
+- This statement will look for __init__.py file in pack and execute all of its top-level statements. 
+- Then it will look for a file named pack/modu.py and execute all of its top-level statements. 
+- After these operations, any variable, function, or class defined in modu.py is available in the pack.modu namespace.
+- 
+- Do not add too much code in __init__.py 
+- When the project complexity grows, there may be sub-packages and sub-sub-packages in a deep directory structure. 
+- In this case, importing a single item from a sub-sub-package will require executing all __init__.py files met while traversing the tree.
+- 
+- Leaving an __init__.py file empty is considered normal and even good practice, 
+- if the package’s modules and sub-packages do not need to share any code.
+- 
+- import very.deep.module as mod. 
+- This allows you to use mod in place of the verbose repetition of very.deep.module.
+
+## Mutable and immutable types 
+
+- https://docs.python-guide.org/writing/structure/
+
+## Dynamic typing 
+
+- https://docs.python-guide.org/writing/structure/
+
+## Context Managers 
+
+- https://docs.python-guide.org/writing/structure/
+
+```
+with open('file.txt') as f:
+    contents = f.read()
 ```
 
 
