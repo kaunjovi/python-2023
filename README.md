@@ -111,6 +111,21 @@ with open('file.txt') as f:
     contents = f.read()
 ```
 
+## Create a Virtual Environment 
+
+- https://towardsdatascience.com/the-good-way-to-structure-a-python-project-d914f27dfcc9
+- Maintain dependencies isolated
+- Share your dependencies with other people.
+
+## Create a separate directory for tests 
+
+- https://towardsdatascience.com/the-good-way-to-structure-a-python-project-d914f27dfcc9
+- Pytest? Or is there something better?
+- if you create a file called greetings.py and 
+- another one to write some tests called test_greetings.py.
+- 
+- ModuleNotFoundError
+- Move tests in a directory and make it a package (__init__.py)
 
 ## Dependency managment
 
@@ -229,6 +244,12 @@ np.round(df["x_0"].memory_usage() / 10**6, 2)
 ```
 
 ### Use special data structures for sparse data
+
+## type-hints
+
+- What are these ? 
+- https://towardsdatascience.com/the-good-way-to-structure-a-python-project-d914f27dfcc9
+
 
 ## Creating a Plotly Graph with 95% CI in Python
 
